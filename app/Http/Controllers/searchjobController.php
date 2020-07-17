@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 
 
-class Careerjet_API {
+class Careerjet_API 
+{
     var $locale = '' ;
     var $version = '3.6';
     var $careerjet_api_content = '';
@@ -285,61 +286,61 @@ class Careerjet_API {
       }
       return $result;
     }
+}
+
+class searchjobController extends Controller
+{
+
+  public function careerjet_api(Request $req){
+      
+    $formData = $req ->input();
+    $keyword = $formData['keyword'];
+    $location = $formData['location'];
+    $page = isset($formData['page']) ? $formData['page'] : '1';
+    $start = ($page*20)-20;
+
+    $data = DB::select('select title,locations,company,url,description,posted_at as date from job_details where locations LIKE :locations and description LIKE :descreption limit '.$start.',20', ['locations' => '%'.$location.'%', 'descreption' => '%'.$keyword.'%']);
+    $data_count = DB::select('select title,locations,company,url,description,posted_at as date from job_details where locations LIKE :locations and description LIKE :descreption', ['locations' => '%'.$location.'%', 'descreption' => '%'.$keyword.'%']);
+
+    if ( sizeof($data)>=20) {
+
+      $result['hits'] = sizeof($data_count);
+      $result['jobs'] = $data;
+      $result = json_encode($result);
+      $result = json_decode($result);
+
+    }else{
+
+      $api = new Careerjet_API('en_GB') ;
+  
+      $result = $api->search(array(
+          'keywords' => "$keyword",
+          'location' => "$location",
+          'page' => "$page" ,
+          'affid' => 'dd57dc32cbc77fb3c855e7e81cddb097',
+      ));
+
+      $result = json_encode($result);
+    
+      $all_data = json_decode($result, true);
+      $result = json_decode($result);
+      //  echo "<pre>";
+      //  print_r($result); die;
+
+      foreach ($all_data['jobs'] as $value) {
+
+        $date = strtotime($value['date']);
+        $date = date('Y-m-d',$date);
+
+          $qry=DB::insert('insert into job_details(title,locations,company,url,description,posted_at)values(?,?,?,?,?,?)',[$value['title'],$value['locations'],$value['company'],$value['url'],$value['description'],$date]);
+      } 
+    }
+
+      $result->query_params = [
+          "keyword"=>$keyword,
+          "location"=>$location
+      ];
+
+      return view('/search')->with('jobs',$result->jobs)->with('query_params',$result->query_params)->with('totalresults',$result->hits);
   }
-
-  class searchjobController extends Controller
-  {
-
-      public function careerjet_api(Request $req){
-          
-        $formData = $req ->input();
-        $keyword = $formData['keyword'];
-        $location = $formData['location'];
-        $page = isset($formData['page']) ? $formData['page'] : '1';
-        $start = ($page*20)-20;
-
-        $data = DB::select('select title,locations,company,url,description,posted_at as date from job_details where locations LIKE :locations and description LIKE :descreption limit '.$start.',20', ['locations' => '%'.$location.'%', 'descreption' => '%'.$keyword.'%']);
-        $data_count = DB::select('select title,locations,company,url,description,posted_at as date from job_details where locations LIKE :locations and description LIKE :descreption', ['locations' => '%'.$location.'%', 'descreption' => '%'.$keyword.'%']);
-
-        if ( sizeof($data)>=20) {
-
-          $result['hits'] = sizeof($data_count);
-          $result['jobs'] = $data;
-          $result = json_encode($result);
-          $result = json_decode($result);
-
-        }else{
-
-          $api = new Careerjet_API('en_GB') ;
-     
-          $result = $api->search(array(
-              'keywords' => "$keyword",
-              'location' => "$location",
-              'page' => "$page" ,
-              'affid' => 'dd57dc32cbc77fb3c855e7e81cddb097',
-          ));
-
-          $result = json_encode($result);
-        
-          $all_data = json_decode($result, true);
-          $result = json_decode($result);
-          //  echo "<pre>";
-          //  print_r($result); die;
-
-          foreach ($all_data['jobs'] as $value) {
-
-            $date = strtotime($value['date']);
-            $date = date('Y-m-d',$date);
-
-              $qry=DB::insert('insert into job_details(title,locations,company,url,description,posted_at)values(?,?,?,?,?,?)',[$value['title'],$value['locations'],$value['company'],$value['url'],$value['description'],$date]);
-          } 
-        }
-
-         $result->query_params = [
-             "keyword"=>$keyword,
-             "location"=>$location
-         ];
-
-         return view('/search')->with('jobs',$result->jobs)->with('query_params',$result->query_params)->with('totalresults',$result->hits);
-      }
-  }
+}
