@@ -114,34 +114,34 @@
         <div class="row">
         	<div class="col-md-3 ftco-animate">
         		<ul class="category">
-        			<li><a href="#">Web Development <span class="number" ></span></a></li>
-        			<li><a href="#">Graphic Designer <span class="number" ></span></a></li>
-        			<li><a href="#">Multimedia <span class="number" ></span></a></li>
-        			<li><a href="#">Advertising <span class="number" ></span></a></li>
+        			<li><a href="#">Web Development </a></li>
+        			<li><a href="#">Graphic Designer </a></li>
+        			<li><a href="#">Multimedia </a></li>
+        			<li><a href="#">Advertising </a></li>
         		</ul>
         	</div>
         	<div class="col-md-3 ftco-animate">
         		<ul class="category">
-        			<li><a href="#">Education &amp; Training <span class="number" ></span></a></li>
-        			<li><a href="#">English <span class="number" ></span></a></li>
-        			<li><a href="#">Social Media <span class="number" ></span></a></li>
-        			<li><a href="#">Writing <span class="number" ></span></a></li>
+        			<li><a href="#">Education &amp; Training </a></li>
+        			<li><a href="#">English </a></li>
+        			<li><a href="#">Social Media </a></li>
+        			<li><a href="#">Writing </a></li>
         		</ul>
         	</div>
         	<div class="col-md-3 ftco-animate">
         		<ul class="category">
-        			<li><a href="#">PHP Programming <span class="number" ></span></a></li>
-        			<li><a href="#">Project Management <span class="number" ></span></a></li>
-        			<li><a href="#">Finance Management <span class="number" ></span></a></li>
-        			<li><a href="#">Office &amp; Admin <span class="number" ></span></a></li>
+        			<li><a href="#">PHP Programming </a></li>
+        			<li><a href="#">Project Management </a></li>
+        			<li><a href="#">Finance Management </a></li>
+        			<li><a href="#">Office &amp; Admin </a></li>
         		</ul>
         	</div>
         	<div class="col-md-3 ftco-animate">
         		<ul class="category">
-        			<li><a href="#">Web Designer <span><span class="number" ></span></span></a></li>
-        			<li><a href="#">Customer Service <span class="number" ></span></a></li>
-        			<li><a href="#">Marketing &amp; Sales <span class="number" ></span></a></li>
-        			<li><a href="#">Software Development <span class="number" ></span></a></li>
+        			<li><a href="#">Web Designer</a></li>
+        			<li><a href="#">Customer Service </a></li>
+        			<li><a href="#">Marketing &amp; Sales </a></li>
+        			<li><a href="#">Software Development </a></li>
         		</ul>
         	</div>
         </div>

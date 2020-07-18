@@ -61,7 +61,7 @@
 <hr>
     <div class="row">
       @foreach($jobs as $job)
-         <div class="col-md-12 ftco-animate">
+         <div class="col-md-9 ftco-animate">
             <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
                <div class="mb-4 mb-md-0 mr-5">
                   <div class="job-post-item-header d-flex align-items-center">
