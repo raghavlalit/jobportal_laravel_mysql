@@ -90,20 +90,13 @@
       <div class="row mt-5">
          <div class="col text-center">
             <div class="block-27">
-               <!-- <ul>
-                  <li><a href="{{url()->full().'&page=1'}}">&lt;</a></li>
-                    @for($i=1; $i<$totalresults/20; $i++)
-                    <li><a href="{{url()->full().'&page='.$i}}"><span>{{$i}}</span></a></li>
-                    @endfor
-                  <li><a href="{{url()->full().'&page='.round($totalresults/20)}}">&gt;</a></li>
-               </ul> -->
                <ul>
                   <li><a title="prev" href="{{url()->full().'&page=1'}}">&lt;</a></li>
                     @for($i=1; $i<6; $i++)
                     <li><a title="{{$i}}" href="{{url()->full().'&page='.$i}}">{{$i}}</a></li>
                     @endfor
                     <li><span style="border:0px;" class="pl-0 pr-0">.....</span></li>
-                     <li><a title="{{$totalresults}}" href="{{url()->full().'&page='.$totalresults}}">{{$totalresults}}</a></li>
+                     <li><a title="{{round($totalresults/20)}}" href="{{url()->full().'&page='.round($totalresults/20)}}">{{round($totalresults/20)}}</a></li>
                   <li><a title="next" href="{{url()->full().'&page='.round($totalresults/20)}}">&gt;</a></li>
                </ul>
 
